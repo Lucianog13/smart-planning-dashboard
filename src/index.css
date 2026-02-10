@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+@theme {
+  --color-glass-bg: rgba(255, 255, 255, 0.05);
+  --color-glass-border: rgba(255, 255, 255, 0.1);
+  --color-card-blue: #3b82f6;
+  --color-card-green: #10b981;
+  --color-card-pink: #d946ef;
+  --color-card-orange: #f59e0b;
+}
+
+@layer base {
+  body {
+    @apply bg-[#030712] text-slate-100 min-h-screen font-sans antialiased;
+    background-image: 
+      radial-gradient(circle at 0% 0%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 100% 100%, rgba(217, 70, 239, 0.05) 0%, transparent 50%);
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl;
+  }
+  
+  .btn-generate {
+    @apply relative overflow-hidden transition-all duration-300 active:scale-95;
+    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  }
+
+  .btn-generate:hover {
+    @apply -translate-y-0.5;
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+  }
+
+  .btn-generate::after {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+    background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 100%);
+  }
+
+  .btn-generate:hover::after {
+    @apply opacity-100;
+  }
+}
+
+/* Custom glow animations */
+@keyframes glow {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+.glow-effect {
+  @apply relative;
+}
+
+.glow-effect::before {
+  content: '';
+  @apply absolute -inset-1 bg-current blur-lg opacity-30 rounded-full;
+  animation: glow 3s infinite ease-in-out;
+}
